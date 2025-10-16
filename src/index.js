@@ -121,8 +121,11 @@ globals.profitSettings = profitSettings;
 
 globals.isZHInGameSetting = localStorage.getItem("i18nextLng")?.toLowerCase()?.startsWith("zh"); // 获取游戏内设置语言
 
-if (localStorage.getItem("initClientData")) {
-    const obj = JSON.parse(localStorage.getItem("initClientData"));
+const initCD = localStorage.getItem("initClientData");
+
+if (initCD) {
+    const decomCD = LZString.decompressFromUTF16(initCD);
+    const obj = JSON.parse(decomCD);
 
     globals.initClientData_actionDetailMap = obj.actionDetailMap;
     globals.initClientData_itemDetailMap = obj.itemDetailMap;

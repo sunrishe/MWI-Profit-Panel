@@ -4,7 +4,7 @@ export function createTooltip() {
     const tooltip = document.createElement('div');
     tooltip.id = 'profit-tooltip';
     tooltip.setAttribute('role', 'tooltip');
-    tooltip.className = 'MuiPopper-root MuiTooltip-popper css-112l0a2';
+    tooltip.className = 'MuiPopper-root MuiTooltip-popper css-55b9xc';
     tooltip.style.position = 'absolute';
     tooltip.style.zIndex = '9999';
     tooltip.style.display = 'none';

@@ -2,3 +2,4 @@ node_modules
 dist
 data/*/*
 data/init_character_data*
+ref/

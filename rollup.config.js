@@ -6,7 +6,7 @@ import fs from 'fs';
 let last = Date.now();
 const isDev = process.env.NODE_ENV === 'development';
 
-const version = "2025.10.02";
+const version = "2025.10.16";
 
 function updateBanner() {
     if (Date.now() - last > 1000) last = Date.now();
@@ -27,6 +27,7 @@ function updateBanner() {
 // @connect      ghproxy.net
 // @connect      mooket.qi-e.top
 // @require      https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js
+// @require      https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js
 // @resource     bootstrapCSS  https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css
 // @downloadURL  http://localhost:8088/MWI-Profit-Panel-Dev.user.js
 // @updateURL    http://localhost:8088/MWI-Profit-Panel-Dev.meta.js
@@ -52,6 +53,7 @@ const prodBanner = `// ==UserScript==
 // @connect      ghproxy.net
 // @connect      mooket.qi-e.top
 // @require      https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js
+// @require      https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js
 // @resource     bootstrapCSS  https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css
 // @license      MIT
 // ==/UserScript==`;
