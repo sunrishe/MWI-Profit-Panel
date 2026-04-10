@@ -3,3 +3,5 @@ dist
 data/*/*
 data/init_character_data*
 ref/
+.worktrees/
+.omc/*

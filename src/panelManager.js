@@ -89,7 +89,7 @@ export async function waitForPannels() {
                 <div class="HousePanel_guideTooltipContainer__1lAt1" style="position: absolute; left: 100%; top: 0; margin-top: 1px; margin-left: 12px;">
                     <div class="GuideTooltip_guideTooltip__1tVq-" id="profitSettingsBtn" style="cursor: pointer">
                         <svg role="img" aria-label="Guide" class="Icon_icon__2LtL_" width="100%" height="100%">
-                            <use href="/static/media/misc_sprite.6b3198dc.svg#settings"></use>
+                            <use href="/static/media/misc_sprite.8d60624b.svg#settings"></use>
                         </svg>
                     </div>
                 </div>
