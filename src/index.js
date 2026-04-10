@@ -140,9 +140,9 @@ if (initCD) {
     globals.initClientData_openableLootDropMap = obj.openableLootDropMap;
 }
 
+window["MWIProfitPanel_Globals"] = globals;
+
 hookWS();
 preFetchData();
 initSettingsMenu();
 GM_addStyle(GM_getResourceText("bootstrapCSS"));
-
-window["MWIProfitPanel_Globals"] = globals;
