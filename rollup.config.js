@@ -28,6 +28,7 @@ function updateBanner() {
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_registerMenuCommand
+// @grant        unsafeWindow
 // @connect      localhost
 // @connect      raw.githubusercontent.com
 // @connect      ghproxy.net
@@ -59,6 +60,7 @@ const prodBanner = `// ==UserScript==
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_registerMenuCommand
+// @grant        unsafeWindow
 // @connect      raw.githubusercontent.com
 // @connect      ghproxy.net
 // @connect      mooket.qi-e.top

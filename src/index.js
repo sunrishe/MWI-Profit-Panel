@@ -140,7 +140,7 @@ if (initCD) {
     globals.initClientData_openableLootDropMap = obj.openableLootDropMap;
 }
 
-window["MWIProfitPanel_Globals"] = globals;
+unsafeWindow["MWIProfitPanel_Globals"] = globals;
 
 hookWS();
 preFetchData();
