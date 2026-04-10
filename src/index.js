@@ -3,7 +3,7 @@ import { preFetchData } from './marketService';
 import { waitForPannels, refreshProfitPanel } from './panelManager'
 import { processingCategory, ZHitemNames } from './utils';
 import LostTrackerExpectEstimate from './LostTrackerExpectEstimate'
-import { validateProfitSettings } from './settingsPanel';
+import { initSettingsMenu, validateProfitSettings } from './settingsManager.js';
 
 function hookWS() {
     const dataProperty = Object.getOwnPropertyDescriptor(MessageEvent.prototype, "data");
@@ -134,6 +134,7 @@ if (initCD) {
 
 hookWS();
 preFetchData();
+initSettingsMenu();
 GM_addStyle(GM_getResourceText("bootstrapCSS"));
 
 window["MWIProfitPanel_Globals"] = globals;
