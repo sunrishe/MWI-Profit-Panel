@@ -248,6 +248,24 @@ function formatTooltipContent(data) {
                             <td style="text-align: right;"><b> ${formatPercent(data.houseBuff.rare_find)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.houseBuff.wisdom)} </b></td>
                         </tr>
+                        <tr style="border-bottom: 1px solid #804600;">
+                            <td style="text-align: right;"><b>成就</b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.achievementBuff.action_speed)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.achievementBuff.efficiency)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.achievementBuff.gathering)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.achievementBuff.essence_find)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.achievementBuff.rare_find)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.achievementBuff.wisdom)} </b></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #804600;">
+                            <td style="text-align: right;"><b>卷轴</b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.personalBuff.action_speed)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.personalBuff.efficiency)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.personalBuff.gathering)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.personalBuff.essence_find)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.personalBuff.rare_find)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.personalBuff.wisdom)} </b></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
