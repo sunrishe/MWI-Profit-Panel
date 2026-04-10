@@ -104,6 +104,7 @@ function showSettingsModal() {
                 border-radius: 4px;
                 font-size: 14px;
                 background: white;
+                color: #333;
                 cursor: pointer;
             ">
                 <option value="ask" ${settings.materialPriceMode === 'ask' ? 'selected' : ''}>高买</option>
@@ -120,6 +121,7 @@ function showSettingsModal() {
                 border-radius: 4px;
                 font-size: 14px;
                 background: white;
+                color: #333;
                 cursor: pointer;
             ">
                 <option value="ask" ${settings.productPriceMode === 'ask' ? 'selected' : ''}>高卖</option>
