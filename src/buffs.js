@@ -69,7 +69,7 @@ class BuffsProvider {
             house: new Map(),
             achievement: new Map(),
             personal: new Map(),
-            // mooPass: new Map(),
+            mooPass: new Map(),
         };
 
         // 订阅全局数据变化
@@ -80,6 +80,7 @@ class BuffsProvider {
             else if (key === 'initCharacterData_houseActionTypeBuffsMap') this.updateBuffCache('house', value);
             else if (key === 'initCharacterData_achievementActionTypeBuffsMap') this.updateBuffCache('achievement', value);
             else if (key === 'initCharacterData_personalActionTypeBuffsMap') this.updateBuffCache('personal', value);
+            else if (key === 'initCharacterData_mooPassActionTypeBuffsMap') this.updateBuffCache('mooPass', value);
         });
 
         this.updateBuffCache('community', globals.initCharacterData_communityActionTypeBuffsMap);
@@ -88,7 +89,7 @@ class BuffsProvider {
         this.updateBuffCache('house', globals.initCharacterData_houseActionTypeBuffsMap);
         this.updateBuffCache('achievement', globals.initCharacterData_achievementActionTypeBuffsMap);
         this.updateBuffCache('personal', globals.initCharacterData_personalActionTypeBuffsMap);
-        // updateBuffCache('mooPass', globals.initCharacterData_houseActionTypeBuffsMap);
+        this.updateBuffCache('mooPass', globals.initCharacterData_mooPassActionTypeBuffsMap);
     }
 
     updateBuffCache(type, data) {
@@ -126,6 +127,10 @@ class BuffsProvider {
 
     getPersonalBuff(actionTypeHrid) {
         return this.buffCache.personal.get(actionTypeHrid) || new Buff();
+    }
+
+    getMooPassBuff(actionTypeHrid) {
+        return this.buffCache.mooPass.get(actionTypeHrid) || new Buff();
     }
 }
 
