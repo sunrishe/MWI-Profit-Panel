@@ -266,11 +266,22 @@ function formatTooltipContent(data) {
                             <td style="text-align: right;"><b> ${formatPercent(data.personalBuff.rare_find)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.personalBuff.wisdom)} </b></td>
                         </tr>
+                        <tr style="border-bottom: 1px solid #804600;">
+                            <td style="text-align: right;"><b>MooPass</b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.mooPassBuff.action_speed)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.mooPassBuff.efficiency)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.mooPassBuff.gathering)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.mooPassBuff.essence_find)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.mooPassBuff.rare_find)} </b></td>
+                            <td style="text-align: right;"><b> ${formatPercent(data.mooPassBuff.wisdom)} </b></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
             <div>每小时动作: ${data.actionPerHour.toFixed(2)}次</div>
             <div>茶减少消耗: ${data.teaBuffs.artisan.toFixed(2)}%</div>
+            <div><strong>单次经验值:</strong> ${formatNumber(data.expPerAction)}</div>
+            <div><strong>每小时经验值:</strong> ${formatNumber(data.expPerHour)}</div>
             <div><strong>每小时利润(税后):</strong> ${formatNumber(data.profitPerHour)}</div>
         `;
     return content;
