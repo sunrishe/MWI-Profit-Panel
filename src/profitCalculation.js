@@ -29,6 +29,7 @@ export default function ProfitCaculation(action, marketJson) {
     const communityBuff = buffs.getCommunityBuff(action.type);
     const achievementBuff = buffs.getAchievementBuff(action.type);
     const personalBuff = buffs.getPersonalBuff(action.type);
+    const mooPassBuff = buffs.getMooPassBuff(action.type);
 
     // 原料支出计算
     let inputItems = [];
@@ -80,6 +81,20 @@ export default function ProfitCaculation(action, marketJson) {
     const baseTimePerActionSec = action.baseTimeCost / 1000000000;
     const actualTimePerActionSec = baseTimePerActionSec / (1 + equipmentBuff.action_speed / 100);
     const actionPerHour = 3600 / actualTimePerActionSec * (1 + totalEffBuff / 100);
+
+    // 总 Wisdom Buff 计算（用于经验值）
+    const totalWisdomBuff = (teaBuffs.wisdom || 0) +
+        (communityBuff.wisdom || 0) +
+        (equipmentBuff.wisdom || 0) +
+        (houseBuff.wisdom || 0) +
+        (achievementBuff.wisdom || 0) +
+        (personalBuff.wisdom || 0) +
+        (mooPassBuff.wisdom || 0);
+
+    // 经验值计算
+    const baseExpGain = action.experienceGain || 0;
+    const expPerAction = Math.round((1 + totalWisdomBuff / 100) * baseExpGain * 10) / 10;
+    const expPerHour = expPerAction * actionPerHour;
 
     // 每小时支出
     const expendPerHour = totalResourcesPricePerAction[buyMode] * actionPerHour + drinksConsumedHourAskPrice[buyMode];
@@ -161,6 +176,10 @@ export default function ProfitCaculation(action, marketJson) {
         equipmentBuff,
         achievementBuff,
         personalBuff,
+        mooPassBuff,
+
+        expPerAction,
+        expPerHour,
 
         profitPerDay,
         ProfitMargin: 100 * (profitPerHour) / expendPerHour
