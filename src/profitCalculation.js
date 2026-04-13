@@ -92,7 +92,7 @@ export default function ProfitCaculation(action, marketJson) {
         (mooPassBuff.wisdom || 0);
 
     // 经验值计算
-    const baseExpGain = action.experienceGain || 0;
+    const baseExpGain = action.experienceGain?.value || 0;
     const expPerAction = Math.round((1 + totalWisdomBuff / 100) * baseExpGain * 10) / 10;
     const expPerHour = expPerAction * actionPerHour;
 
