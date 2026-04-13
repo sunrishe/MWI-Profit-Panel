@@ -85,7 +85,7 @@ function handleMessage(message) {
                 globals.initCharacterData_houseActionTypeBuffsMap = obj.houseActionTypeBuffsMap;
                 refreshProfitPanel(true);
             }
-            else if (obj.type === "achievement_buffs_updated") {
+            else if (obj.type === "achievements_updated") {
                 globals.initCharacterData_achievementActionTypeBuffsMap = obj.achievementActionTypeBuffsMap;
                 refreshProfitPanel(true);
             }
