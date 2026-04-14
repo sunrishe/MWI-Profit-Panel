@@ -168,11 +168,10 @@ export const ZHActionTypeNames = {
 }
 
 export function getActionTypeName(actionType) {
-    const translations = i18n.actionTypes[actionType];
-    if (translations) {
-        return globals.isZHInGameSetting ? translations.zh : translations.en;
+    if (globals.isZHInGameSetting) {
+        return ZHActionTypeNames[actionType] || actionType;
     }
-    return ZHActionTypeNames[actionType] || actionType;
+    return actionType;
 }
 
 const OneSecond = 1000;
