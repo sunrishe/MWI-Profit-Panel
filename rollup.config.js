@@ -33,9 +33,7 @@ function updateBanner() {
 // @connect      raw.githubusercontent.com
 // @connect      ghproxy.net
 // @connect      mooket.qi-e.top
-// @require      https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js
 // @require      https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js
-// @resource     bootstrapCSS  https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css
 // @downloadURL  http://localhost:8088/MWI-Profit-Panel-Dev.user.js
 // @updateURL    http://localhost:8088/MWI-Profit-Panel-Dev.meta.js
 // ==/UserScript==`
@@ -64,9 +62,7 @@ const prodBanner = `// ==UserScript==
 // @connect      raw.githubusercontent.com
 // @connect      ghproxy.net
 // @connect      mooket.qi-e.top
-// @require      https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js
 // @require      https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js
-// @resource     bootstrapCSS  https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css
 // @license      MIT
 // ==/UserScript==`;
 
