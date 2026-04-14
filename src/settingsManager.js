@@ -1,6 +1,6 @@
 import globals from './globals.js';
 import { refreshProfitPanel } from './panelManager.js';
-import { t } from './utils.js';
+import { t, getActionTypeName } from './utils.js';
 
 // 验证设置（从原 settingsPanel.js 保留）
 export function validateProfitSettings(settings) {
@@ -138,23 +138,23 @@ function showSettingsModal() {
         <div style="margin-bottom: 16px;">
             <label style="display: block; margin-bottom: 10px; font-size: 14px; color: #333; font-weight: 500;">${t('显示的动作分类', 'Action Categories')}</label>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                ${renderCheckbox('mwi-cat-milking', 'milking', '挤奶', settings.actionCategories)}
-                ${renderCheckbox('mwi-cat-foraging', 'foraging', '采摘', settings.actionCategories)}
-                ${renderCheckbox('mwi-cat-woodcutting', 'woodcutting', '伐木', settings.actionCategories)}
-                ${renderCheckbox('mwi-cat-cheesesmithing', 'cheesesmithing', '奶锻制造', settings.actionCategories)}
-                ${renderCheckbox('mwi-cat-crafting', 'crafting', '制作', settings.actionCategories)}
-                ${renderCheckbox('mwi-cat-tailoring', 'tailoring', '缝纫', settings.actionCategories)}
-                ${renderCheckbox('mwi-cat-cooking', 'cooking', '烹饪', settings.actionCategories)}
-                ${renderCheckbox('mwi-cat-brewing', 'brewing', '冲泡', settings.actionCategories)}
+                ${renderCheckbox('mwi-cat-milking', 'milking', getActionTypeName('milking'), settings.actionCategories)}
+                ${renderCheckbox('mwi-cat-foraging', 'foraging', getActionTypeName('foraging'), settings.actionCategories)}
+                ${renderCheckbox('mwi-cat-woodcutting', 'woodcutting', getActionTypeName('woodcutting'), settings.actionCategories)}
+                ${renderCheckbox('mwi-cat-cheesesmithing', 'cheesesmithing', getActionTypeName('cheesesmithing'), settings.actionCategories)}
+                ${renderCheckbox('mwi-cat-crafting', 'crafting', getActionTypeName('crafting'), settings.actionCategories)}
+                ${renderCheckbox('mwi-cat-tailoring', 'tailoring', getActionTypeName('tailoring'), settings.actionCategories)}
+                ${renderCheckbox('mwi-cat-cooking', 'cooking', getActionTypeName('cooking'), settings.actionCategories)}
+                ${renderCheckbox('mwi-cat-brewing', 'brewing', getActionTypeName('brewing'), settings.actionCategories)}
             </div>
         </div>
 
         <div style="margin-bottom: 20px;">
-            <label style="display: block; margin-bottom: 10px; font-size: 14px; color: #333; font-weight: 500;">${t('数据来源', 'Data Source')} (暂时不生效)</label>
+            <label style="display: block; margin-bottom: 10px; font-size: 14px; color: #333; font-weight: 500;">${t('数据来源', 'Data Source')} (${t('暂时不生效', 'currently inactive')})</label>
             <div style="display: flex; flex-direction: column; gap: 8px;">
-                ${renderCheckbox('mwi-src-official', 'Official', '官方市场', settings.dataSourceKeys)}
-                ${renderCheckbox('mwi-src-mooketapi', 'MooketApi', 'Mooket API', settings.dataSourceKeys)}
-                ${renderCheckbox('mwi-src-mooket', 'Mooket', 'Mooket实时', settings.dataSourceKeys)}
+                ${renderCheckbox('mwi-src-official', 'Official', t('官方市场', 'Official Market'), settings.dataSourceKeys)}
+                ${renderCheckbox('mwi-src-mooketapi', 'MooketApi', t('Mooket API', 'Mooket API'), settings.dataSourceKeys)}
+                ${renderCheckbox('mwi-src-mooket', 'Mooket', t('Mooket实时', 'Mooket Realtime'), settings.dataSourceKeys)}
             </div>
         </div>
 
