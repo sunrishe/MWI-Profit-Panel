@@ -344,7 +344,7 @@ function formatTooltipContent(data) {
 
                 let levelUpHtml = `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #804600;">
                     <div style="font-weight: bold; margin-bottom: 4px;">${t('升级预估', 'Level Up Est.')} (${currentLevel}${t('级', 'lv')} → ${currentLevel + displayCount}${t('级', 'lv')}):</div>
-                    <div style="font-size: 10px; color: #666;">`;
+                    <div style="color: #666;">`;
 
                 for (let i = 1; i <= displayCount; i++) {
                     const targetLevel = currentLevel + i;
