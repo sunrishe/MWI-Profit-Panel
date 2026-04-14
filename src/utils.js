@@ -117,13 +117,13 @@ export function mooketStatus() {
 
 export function formatDuration(diffMs) {
     const diffSeconds = Math.floor(diffMs / 1000);
-    if (diffSeconds < 60) return `${diffSeconds}秒前`;
+    if (diffSeconds < 60) return `${diffSeconds}${t('秒前', 's ago')}`;
 
     const diffMinutes = Math.floor(diffSeconds / 60);
-    if (diffMinutes < 60) return `${diffMinutes}分钟前`;
+    if (diffMinutes < 60) return `${diffMinutes}${t('分钟前', 'm ago')}`;
 
     const diffHours = Math.floor(diffMinutes / 60);
-    return `${diffHours}小时 ${diffMinutes - diffHours * 60}分钟前`;
+    return `${diffHours}${t('小时', 'h')} ${diffMinutes - diffHours * 60}${t('分钟前', 'm ago')}`;
 }
 
 export function getMwiObj() {
