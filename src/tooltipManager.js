@@ -242,18 +242,18 @@ function formatTooltipContent(data) {
                     </tbody>
                 </table>
             </div>
-            <div><strong>${t('每小时收入', 'Hourly Income')}(税后):</strong> ${formatNumber(data.outputPerHour.bid)}</div>
+            <div><strong>${t('每小时收入', 'Hourly Income')}(${t('税后', 'after tax')}):</strong> ${formatNumber(data.outputPerHour.bid)}</div>
             <div style="color: #804600; font-size: 10px;">
                 <table style="width:100%; border-collapse: collapse;">
                     <tbody>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <th style="text-align: right;">类型</th>
-                            <th style="text-align: right;">速度</th>
-                            <th style="text-align: right;">效率</th>
-                            <th style="text-align: right;">数量</th>
-                            <th style="text-align: right;">精华</th>
-                            <th style="text-align: right;">稀有</th>
-                            <th style="text-align: right;">经验</th>
+                            <th style="text-align: right;">${t('类型', 'Type')}</th>
+                            <th style="text-align: right;">${t('速度', 'Speed')}</th>
+                            <th style="text-align: right;">${t('效率', 'Eff.')}</th>
+                            <th style="text-align: right;">${t('数量', 'Qty')}</th>
+                            <th style="text-align: right;">${t('精华', 'Ess.')}</th>
+                            <th style="text-align: right;">${t('稀有', 'Rare')}</th>
+                            <th style="text-align: right;">${t('经验', 'Exp')}</th>
                         </tr>
                         <tr style="border-bottom: 1px solid #804600;">
                             <td style="text-align: right;"><b>${t('社区', 'Community')}</b></td>
@@ -332,7 +332,7 @@ function formatTooltipContent(data) {
             <div>${t('茶减少消耗', 'Tea Reduction')}: ${data.teaBuffs.artisan.toFixed(2)}%</div>
             <div><strong>${t('单次经验值', 'Exp/Action')}:</strong> ${formatNumber(data.expPerAction)}</div>
             <div><strong>${t('每小时经验值', 'Exp/h')}:</strong> ${formatNumber(data.expPerHour)}</div>
-            <div><strong>${t('每小时利润', 'Hourly Profit')}(税后):</strong> ${formatNumber(data.profitPerHour)}</div>
+            <div><strong>${t('每小时利润', 'Hourly Profit')}(${t('税后', 'after tax')}):</strong> ${formatNumber(data.profitPerHour)}</div>
             ${(() => {
                 const displayCount = globals.profitSettings?.levelUpDisplayCount || 3;
                 const currentSkill = getCurrentSkill(data.skillHrid);
