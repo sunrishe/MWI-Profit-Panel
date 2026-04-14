@@ -1,6 +1,7 @@
 import globals from "./globals";
 import {
     ZHActionTypeNames,
+    getActionTypeName,
     processingCategory,
     getSvg,
     formatNumber,
@@ -51,7 +52,7 @@ export function GenerateDom(marketJson) {
             <div>
                 <div class="Inventory_itemGrid__20YAH">
                     <div class="Inventory_label__XEOAx" >
-                        <span class="Inventory_categoryButton__35s1x">${ZHActionTypeNames[actionType]}</span>
+                        <span class="Inventory_categoryButton__35s1x">${getActionTypeName(actionType)}</span>
                     </div>
                     ${actionHtml.join('\n')}
                 </div>

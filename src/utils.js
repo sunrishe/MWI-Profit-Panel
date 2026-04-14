@@ -167,6 +167,14 @@ export const ZHActionTypeNames = {
     brewing: "\u51b2\u6ce1",
 }
 
+export function getActionTypeName(actionType) {
+    const translations = i18n.actionTypes[actionType];
+    if (translations) {
+        return globals.isZHInGameSetting ? translations.zh : translations.en;
+    }
+    return ZHActionTypeNames[actionType] || actionType;
+}
+
 const OneSecond = 1000;
 const OneMinute = 60 * OneSecond;
 const OneHour = 60 * OneMinute;

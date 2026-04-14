@@ -50,5 +50,21 @@ export const i18n = {
         levelUpDisplayCount: { zh: '升级预估显示级数', en: 'Level Up Display Count' },
         save: { zh: '保存', en: 'Save' },
         cancel: { zh: '取消', en: 'Cancel' },
+    },
+    panel: {
+        profit: { zh: '收益', en: 'Profit' },
+        productionProfitDetails: { zh: '生产收益详情', en: 'Production Profit Details' },
+        dataUpdated: { zh: '数据更新于', en: 'Data updated' },
+        oldest: { zh: '最旧', en: 'Oldest' },
+    },
+    actionTypes: {
+        milking: { zh: '挤奶', en: 'Milking' },
+        foraging: { zh: '采摘', en: 'Foraging' },
+        woodcutting: { zh: '伐木', en: 'Woodcutting' },
+        cheesesmithing: { zh: '奶锻制造', en: 'Cheesesmithing' },
+        crafting: { zh: '制作', en: 'Crafting' },
+        tailoring: { zh: '缝纫', en: 'Tailoring' },
+        cooking: { zh: '烹饪', en: 'Cooking' },
+        brewing: { zh: '冲泡', en: 'Brewing' },
     }
 };
