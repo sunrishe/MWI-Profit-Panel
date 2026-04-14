@@ -1,4 +1,4 @@
-import { formatNumber, getDuration, getMwiObj, TimeSpan, t } from './utils.js';
+import { formatNumber, getDuration, getMwiObj, TimeSpan, t, getItemName } from './utils.js';
 import globals from './globals.js';
 
 
@@ -412,8 +412,10 @@ class UnifyMarketData {
                 dataSrcArr.push(`${val} (${formatNumber(this.statMap.src[val] * 100 / this.statMap.src.total)}%)`);
             }
         }
-        const oldestStr = `${globals.en2ZhMap[this.statMap.oldestItem.name]}(${getDuration(new Date(this.statMap.oldestItem.time * 1000))})`;
-        const newestStr = `${globals.en2ZhMap[this.statMap.newestItem.name]}(${getDuration(new Date(this.statMap.newestItem.time * 1000))})`;
+        const oldestItemName = getItemName(this.statMap.oldestItem.name.replace(/\//g, '_').replace(/^_/, '/'));
+        const newestItemName = getItemName(this.statMap.newestItem.name.replace(/\//g, '_').replace(/^_/, '/'));
+        const oldestStr = `${oldestItemName}(${getDuration(new Date(this.statMap.oldestItem.time * 1000))})`;
+        const newestStr = `${newestItemName}(${getDuration(new Date(this.statMap.newestItem.time * 1000))})`;
 
         return `${t('最旧', 'Oldest')}: ${oldestStr} ${t('数据来源', 'Data Source')}: [${dataSrcArr.join(',')}]`;
     }
