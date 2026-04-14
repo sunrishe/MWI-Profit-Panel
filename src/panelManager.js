@@ -1,7 +1,7 @@
 import globals from './globals.js';
 import { GenerateDom } from './domGenerator.js';
 import { createTooltip } from './tooltipManager.js';
-import { formatDuration, getMwiObj } from './utils.js';
+import { formatDuration, getMwiObj, t } from './utils.js';
 
 let initialized = false;
 
@@ -25,10 +25,10 @@ function setTradingMode(materialMode, productMode) {
 function generateTradingModeButtons() {
     const currentMode = getCurrentTradingMode();
     const modes = [
-        { key: 'ask-bid', label: '高买低卖', material: 'ask', product: 'bid' },
-        { key: 'ask-ask', label: '高买高卖', material: 'ask', product: 'ask' },
-        { key: 'bid-ask', label: '低买高卖', material: 'bid', product: 'ask' },
-        { key: 'bid-bid', label: '低买低卖', material: 'bid', product: 'bid' }
+        { key: 'ask-bid', label: t('高买低卖', 'High Buy/Low Sell'), material: 'ask', product: 'bid' },
+        { key: 'ask-ask', label: t('高买高卖', 'High Buy/High Sell'), material: 'ask', product: 'ask' },
+        { key: 'bid-ask', label: t('低买高卖', 'Low Buy/High Sell'), material: 'bid', product: 'ask' },
+        { key: 'bid-bid', label: t('低买低卖', 'Low Buy/Low Sell'), material: 'bid', product: 'bid' }
     ];
 
     return modes.map(mode => `
@@ -74,7 +74,7 @@ export async function waitForPannels() {
 
         const newTabButton = document.createElement('button');
         newTabButton.className = 'MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1q2h7u5 income-tab';
-        newTabButton.innerHTML = `<span class="MuiBadge-root TabsComponent_badge__1Du26 css-1rzb3uu">收益<span class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorWarning css-dpce5z"></span></span><span class="MuiTouchRipple-root css-w0pj6f"></span>`;
+        newTabButton.innerHTML = `<span class="MuiBadge-root TabsComponent_badge__1Du26 css-1rzb3uu">${t('收益', 'Profit')}<span class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorWarning css-dpce5z"></span></span><span class="MuiTouchRipple-root css-w0pj6f"></span>`;
         newTabButton.classList.add('income-tab');
         tabsContainer.appendChild(newTabButton);
 
@@ -84,10 +84,10 @@ export async function waitForPannels() {
         newPanel.innerHTML = `
             <div class="Inventory_inventory__17CH2 profit-pannel">
             <h1 class="HousePanel_title__2fQ1U" style="width: fit-content; margin: 4px auto 8px; font-size: 18px; font-weight: 600;">
-                <div>生产收益详情</div>
+                <div>${t('生产收益详情', 'Production Profit Details')}</div>
             </h1>
                 <div style="display: flex; align-items: center; justify-content: space-between; margin: 0 10px 8px; flex-wrap: wrap;">
-                    <span style="color: green; font-size: 0.8em; margin-bottom: 4px;">数据更新于: ${formatDuration(Date.now() - globals.freshnessMarketJson.time * 1000)}</span>
+                    <span style="color: green; font-size: 0.8em; margin-bottom: 4px;">${t('数据更新于', 'Data updated')}: ${formatDuration(Date.now() - globals.freshnessMarketJson.time * 1000)}</span>
                     <div id="tradingModeContainer" style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
                         ${generateTradingModeButtons()}
                     </div>
