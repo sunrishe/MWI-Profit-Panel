@@ -34,6 +34,11 @@ export function validateProfitSettings(settings) {
         }
     }
 
+    // 验证 levelUpDisplayCount (1-10)
+    if (typeof settings.levelUpDisplayCount !== 'number' || settings.levelUpDisplayCount < 1 || settings.levelUpDisplayCount > 10) {
+        settings.levelUpDisplayCount = 3;
+    }
+
     return settings;
 }
 
@@ -152,6 +157,31 @@ function showSettingsModal() {
             </div>
         </div>
 
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 6px; font-size: 14px; color: #333; font-weight: 500;">升级预估显示级数</label>
+            <select id="mwi-level-up-display-count" style="
+                width: 100%;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 14px;
+                background: white;
+                color: #333;
+                cursor: pointer;
+            ">
+                <option value="1" ${settings.levelUpDisplayCount === 1 ? 'selected' : ''}>1级</option>
+                <option value="2" ${settings.levelUpDisplayCount === 2 ? 'selected' : ''}>2级</option>
+                <option value="3" ${settings.levelUpDisplayCount === 3 ? 'selected' : ''}>3级</option>
+                <option value="4" ${settings.levelUpDisplayCount === 4 ? 'selected' : ''}>4级</option>
+                <option value="5" ${settings.levelUpDisplayCount === 5 ? 'selected' : ''}>5级</option>
+                <option value="6" ${settings.levelUpDisplayCount === 6 ? 'selected' : ''}>6级</option>
+                <option value="7" ${settings.levelUpDisplayCount === 7 ? 'selected' : ''}>7级</option>
+                <option value="8" ${settings.levelUpDisplayCount === 8 ? 'selected' : ''}>8级</option>
+                <option value="9" ${settings.levelUpDisplayCount === 9 ? 'selected' : ''}>9级</option>
+                <option value="10" ${settings.levelUpDisplayCount === 10 ? 'selected' : ''}>10级</option>
+            </select>
+        </div>
+
         <div style="display: flex; justify-content: flex-end; gap: 10px;">
             <button id="mwi-settings-cancel" style="
                 padding: 8px 20px;
@@ -258,7 +288,8 @@ function setupModalEventListeners(overlay, dialog) {
             materialPriceMode,
             productPriceMode,
             actionCategories,
-            dataSourceKeys
+            dataSourceKeys,
+            levelUpDisplayCount: parseInt(document.getElementById('mwi-level-up-display-count').value, 10)
         };
 
         globals.profitSettings = validateProfitSettings(newSettings);

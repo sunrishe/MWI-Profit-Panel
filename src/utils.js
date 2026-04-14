@@ -176,3 +176,45 @@ export const TimeSpan = {
     ONE_HOURS: OneHour,
     FOUR_HOURS: 4 * OneHour,
 }
+
+/**
+ * 将秒数格式化为可读时间
+ * @param {number} seconds - 秒数
+ * @returns {string} - 格式化后的时间字符串，如 "1d 3h" 或 "30m"
+ */
+export function timeReadable(seconds) {
+    if (isNaN(seconds) || seconds === Infinity || seconds <= 0) {
+        return "-";
+    }
+
+    const days = Math.floor(seconds / 86400);
+    const hrs = Math.floor((seconds % 86400) / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+
+    if (days > 0) {
+        return `${days}d ${hrs}h`;
+    } else if (hrs > 0) {
+        return `${hrs}h ${mins}m`;
+    } else {
+        return `${mins}m`;
+    }
+}
+
+/**
+ * 获取当前技能的实时数据
+ * 优先使用 getMwiObj() 获取实时数据，如果失败则使用 globals
+ * @param {string} skillHrid - 技能 HRID，如 "/skills/foraging"
+ * @returns {Object|null} - 技能对象或 null
+ */
+export function getCurrentSkill(skillHrid) {
+    // 优先从游戏对象获取实时数据
+    const mwiObj = getMwiObj();
+    if (mwiObj?.game?.state?.characterSkillMap) {
+        const skill = [...mwiObj.game.state.characterSkillMap.values()]
+            .find(s => s.skillHrid === skillHrid);
+        if (skill) return skill;
+    }
+    // 回退到 globals 数据
+    return globals.initCharacterData_characterSkills
+        .find(s => s.skillHrid === skillHrid);
+}

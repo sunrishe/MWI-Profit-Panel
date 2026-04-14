@@ -97,6 +97,18 @@ function handleMessage(message) {
                 globals.initCharacterData_mooPassActionTypeBuffsMap = obj.mooPassActionTypeBuffsMap;
                 refreshProfitPanel(true);
             }
+            else if (obj.type === "action_completed") {
+                // 更新技能经验数据
+                if (obj.endCharacterSkills) {
+                    for (const updatedSkill of obj.endCharacterSkills) {
+                        const index = globals.initCharacterData_characterSkills
+                            .findIndex(s => s.skillHrid === updatedSkill.skillHrid);
+                        if (index !== -1) {
+                            globals.initCharacterData_characterSkills[index] = updatedSkill;
+                        }
+                    }
+                }
+            }
         }
     }
     catch (err) { console.error(err); }

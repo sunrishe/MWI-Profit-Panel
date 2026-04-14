@@ -161,6 +161,7 @@ export default function ProfitCaculation(action, marketJson) {
     return {
         actionNames: getActionName(action.hrid),
         actionHrid,
+        skillHrid: action.levelRequirement.skillHrid,
         inputItems,
         outputItems,
         actionPerHour,

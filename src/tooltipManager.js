@@ -1,4 +1,5 @@
-import { formatNumber } from './utils.js';
+import globals from './globals.js';
+import { formatNumber, timeReadable, getCurrentSkill } from './utils.js';
 
 export function createTooltip() {
     const tooltip = document.createElement('div');
@@ -88,6 +89,55 @@ function formatPercent(percent) {
     const result = percent ? `+${formatNumber(percent)}%` : "-";
     return result;
 }
+
+// 获取经验表
+function getExpTable() {
+    const initCD = localStorage.getItem("initClientData");
+    if (!initCD) return null;
+    try {
+        const decomCD = JSON.parse(LZString.decompressFromUTF16(initCD));
+        return decomCD.levelExperienceTable;
+    } catch (e) {
+        return null;
+    }
+}
+
+/**
+ * 计算到目标等级需要的时间和动作数
+ * @param {Object} data - 包含 expPerHour, expPerAction, skillHrid
+ * @param {number} targetLvl - 目标等级
+ * @returns {Object|null} - { numOfActions, timeSec } 或 null
+ */
+function calculateNeedToLevel(data, targetLvl) {
+    const expTable = getExpTable();
+    const currentSkill = getCurrentSkill(data.skillHrid);
+
+    if (!expTable || !currentSkill || !data.expPerHour || data.expPerHour <= 0) {
+        return null;
+    }
+
+    const currentExp = currentSkill.experience;
+    const currentLevel = currentSkill.level;
+
+    if (targetLvl <= currentLevel) {
+        return null;
+    }
+
+    const targetTotalExp = expTable[targetLvl];
+    if (!targetTotalExp || targetTotalExp <= currentExp) {
+        return null;
+    }
+
+    const remainingExpTotal = targetTotalExp - currentExp;
+    const totalTimeSec = remainingExpTotal / data.expPerHour * 3600;
+    const totalActions = Math.ceil(remainingExpTotal / data.expPerAction);
+
+    return {
+        numOfActions: totalActions,
+        timeSec: totalTimeSec
+    };
+}
+
 function formatTooltipContent(data) {
     let totalInputAsk = 0, totalInputBid = 0;
     let totalInputMedianAsk = 0, totalInputMedianBid = 0;
@@ -283,6 +333,32 @@ function formatTooltipContent(data) {
             <div><strong>单次经验值:</strong> ${formatNumber(data.expPerAction)}</div>
             <div><strong>每小时经验值:</strong> ${formatNumber(data.expPerHour)}</div>
             <div><strong>每小时利润(税后):</strong> ${formatNumber(data.profitPerHour)}</div>
+            ${(() => {
+                const displayCount = globals.profitSettings?.levelUpDisplayCount || 3;
+                const currentSkill = getCurrentSkill(data.skillHrid);
+                const currentLevel = currentSkill?.level || 0;
+
+                if (currentLevel <= 0 || displayCount <= 0) {
+                    return '';
+                }
+
+                let levelUpHtml = `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #804600;">
+                    <div style="font-weight: bold; margin-bottom: 4px;">升级预估 (${currentLevel}级 → ${currentLevel + displayCount}级):</div>
+                    <div style="font-size: 10px; color: #666;">`;
+
+                for (let i = 1; i <= displayCount; i++) {
+                    const targetLevel = currentLevel + i;
+                    const result = calculateNeedToLevel(data, targetLevel);
+                    if (result) {
+                        levelUpHtml += `<div>到${targetLevel}级: ${timeReadable(result.timeSec)} (${formatNumber(result.numOfActions)}次)</div>`;
+                    } else {
+                        levelUpHtml += `<div>到${targetLevel}级: -</div>`;
+                    }
+                }
+
+                levelUpHtml += `</div></div>`;
+                return levelUpHtml;
+            })()}
         `;
     return content;
 }
