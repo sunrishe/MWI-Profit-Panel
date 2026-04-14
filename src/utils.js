@@ -1,5 +1,6 @@
 import globals from "./globals";
 import zhTranslation from "./zhTranslation";
+import { i18n } from "./i18n.js";
 
 export function getItemName(itemHrid) {
     if (globals.isZHInGameSetting) return ZHitemNames[itemHrid];
@@ -217,4 +218,14 @@ export function getCurrentSkill(skillHrid) {
     // 回退到 globals 数据
     return globals.initCharacterData_characterSkills
         .find(s => s.skillHrid === skillHrid);
+}
+
+/**
+ * 翻译函数
+ * @param {string} zh - 中文文本
+ * @param {string} en - 英文文本
+ * @returns {string} - 根据游戏设置返回对应语言文本
+ */
+export function t(zh, en) {
+    return globals.isZHInGameSetting ? zh : en;
 }

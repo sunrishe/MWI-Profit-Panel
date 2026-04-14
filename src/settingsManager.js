@@ -1,5 +1,6 @@
 import globals from './globals.js';
 import { refreshProfitPanel } from './panelManager.js';
+import { t } from './utils.js';
 
 // 验证设置（从原 settingsPanel.js 保留）
 export function validateProfitSettings(settings) {
@@ -98,10 +99,10 @@ function showSettingsModal() {
     `;
 
     dialog.innerHTML = `
-        <h3 style="margin: 0 0 20px 0; font-size: 18px; font-weight: 600; color: #333;">收益设置</h3>
+        <h3 style="margin: 0 0 20px 0; font-size: 18px; font-weight: 600; color: #333;">${t('收益设置', 'Profit Settings')}</h3>
 
         <div style="margin-bottom: 16px;">
-            <label style="display: block; margin-bottom: 6px; font-size: 14px; color: #333; font-weight: 500;">原料进货方式</label>
+            <label style="display: block; margin-bottom: 6px; font-size: 14px; color: #333; font-weight: 500;">${t('原料进货方式', 'Material Price Mode')}</label>
             <select id="mwi-material-price-mode" style="
                 width: 100%;
                 padding: 8px 12px;
@@ -112,13 +113,13 @@ function showSettingsModal() {
                 color: #333;
                 cursor: pointer;
             ">
-                <option value="ask" ${settings.materialPriceMode === 'ask' ? 'selected' : ''}>高买</option>
-                <option value="bid" ${settings.materialPriceMode === 'bid' ? 'selected' : ''}>低买</option>
+                <option value="ask" ${settings.materialPriceMode === 'ask' ? 'selected' : ''}>${t('高买', 'High Ask')}</option>
+                <option value="bid" ${settings.materialPriceMode === 'bid' ? 'selected' : ''}>${t('低买', 'Low Bid')}</option>
             </select>
         </div>
 
         <div style="margin-bottom: 16px;">
-            <label style="display: block; margin-bottom: 6px; font-size: 14px; color: #333; font-weight: 500;">产品出货方式</label>
+            <label style="display: block; margin-bottom: 6px; font-size: 14px; color: #333; font-weight: 500;">${t('产品出货方式', 'Product Price Mode')}</label>
             <select id="mwi-product-price-mode" style="
                 width: 100%;
                 padding: 8px 12px;
@@ -129,13 +130,13 @@ function showSettingsModal() {
                 color: #333;
                 cursor: pointer;
             ">
-                <option value="ask" ${settings.productPriceMode === 'ask' ? 'selected' : ''}>高卖</option>
-                <option value="bid" ${settings.productPriceMode === 'bid' ? 'selected' : ''}>低卖</option>
+                <option value="ask" ${settings.productPriceMode === 'ask' ? 'selected' : ''}>${t('高卖', 'High Ask')}</option>
+                <option value="bid" ${settings.productPriceMode === 'bid' ? 'selected' : ''}>${t('低卖', 'Low Bid')}</option>
             </select>
         </div>
 
         <div style="margin-bottom: 16px;">
-            <label style="display: block; margin-bottom: 10px; font-size: 14px; color: #333; font-weight: 500;">显示的动作分类</label>
+            <label style="display: block; margin-bottom: 10px; font-size: 14px; color: #333; font-weight: 500;">${t('显示的动作分类', 'Action Categories')}</label>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                 ${renderCheckbox('mwi-cat-milking', 'milking', '挤奶', settings.actionCategories)}
                 ${renderCheckbox('mwi-cat-foraging', 'foraging', '采摘', settings.actionCategories)}
@@ -149,7 +150,7 @@ function showSettingsModal() {
         </div>
 
         <div style="margin-bottom: 20px;">
-            <label style="display: block; margin-bottom: 10px; font-size: 14px; color: #333; font-weight: 500;">数据来源 (暂时不生效)</label>
+            <label style="display: block; margin-bottom: 10px; font-size: 14px; color: #333; font-weight: 500;">${t('数据来源', 'Data Source')} (暂时不生效)</label>
             <div style="display: flex; flex-direction: column; gap: 8px;">
                 ${renderCheckbox('mwi-src-official', 'Official', '官方市场', settings.dataSourceKeys)}
                 ${renderCheckbox('mwi-src-mooketapi', 'MooketApi', 'Mooket API', settings.dataSourceKeys)}
@@ -158,7 +159,7 @@ function showSettingsModal() {
         </div>
 
         <div style="margin-bottom: 20px;">
-            <label style="display: block; margin-bottom: 6px; font-size: 14px; color: #333; font-weight: 500;">升级预估显示级数</label>
+            <label style="display: block; margin-bottom: 6px; font-size: 14px; color: #333; font-weight: 500;">${t('升级预估显示级数', 'Level Up Display Count')}</label>
             <select id="mwi-level-up-display-count" style="
                 width: 100%;
                 padding: 8px 12px;
@@ -169,16 +170,16 @@ function showSettingsModal() {
                 color: #333;
                 cursor: pointer;
             ">
-                <option value="1" ${settings.levelUpDisplayCount === 1 ? 'selected' : ''}>1级</option>
-                <option value="2" ${settings.levelUpDisplayCount === 2 ? 'selected' : ''}>2级</option>
-                <option value="3" ${settings.levelUpDisplayCount === 3 ? 'selected' : ''}>3级</option>
-                <option value="4" ${settings.levelUpDisplayCount === 4 ? 'selected' : ''}>4级</option>
-                <option value="5" ${settings.levelUpDisplayCount === 5 ? 'selected' : ''}>5级</option>
-                <option value="6" ${settings.levelUpDisplayCount === 6 ? 'selected' : ''}>6级</option>
-                <option value="7" ${settings.levelUpDisplayCount === 7 ? 'selected' : ''}>7级</option>
-                <option value="8" ${settings.levelUpDisplayCount === 8 ? 'selected' : ''}>8级</option>
-                <option value="9" ${settings.levelUpDisplayCount === 9 ? 'selected' : ''}>9级</option>
-                <option value="10" ${settings.levelUpDisplayCount === 10 ? 'selected' : ''}>10级</option>
+                <option value="1" ${settings.levelUpDisplayCount === 1 ? 'selected' : ''}>1${t('级', 'lv')}</option>
+                <option value="2" ${settings.levelUpDisplayCount === 2 ? 'selected' : ''}>2${t('级', 'lv')}</option>
+                <option value="3" ${settings.levelUpDisplayCount === 3 ? 'selected' : ''}>3${t('级', 'lv')}</option>
+                <option value="4" ${settings.levelUpDisplayCount === 4 ? 'selected' : ''}>4${t('级', 'lv')}</option>
+                <option value="5" ${settings.levelUpDisplayCount === 5 ? 'selected' : ''}>5${t('级', 'lv')}</option>
+                <option value="6" ${settings.levelUpDisplayCount === 6 ? 'selected' : ''}>6${t('级', 'lv')}</option>
+                <option value="7" ${settings.levelUpDisplayCount === 7 ? 'selected' : ''}>7${t('级', 'lv')}</option>
+                <option value="8" ${settings.levelUpDisplayCount === 8 ? 'selected' : ''}>8${t('级', 'lv')}</option>
+                <option value="9" ${settings.levelUpDisplayCount === 9 ? 'selected' : ''}>9${t('级', 'lv')}</option>
+                <option value="10" ${settings.levelUpDisplayCount === 10 ? 'selected' : ''}>10${t('级', 'lv')}</option>
             </select>
         </div>
 
@@ -191,7 +192,7 @@ function showSettingsModal() {
                 cursor: pointer;
                 font-size: 14px;
                 color: #333;
-            ">取消</button>
+            ">${t('取消', 'Cancel')}</button>
             <button id="mwi-settings-save" style="
                 padding: 8px 20px;
                 border: none;
@@ -201,7 +202,7 @@ function showSettingsModal() {
                 cursor: pointer;
                 font-size: 14px;
                 font-weight: 500;
-            ">保存</button>
+            ">${t('保存', 'Save')}</button>
         </div>
     `;
 

@@ -1,6 +1,6 @@
 import globals from "./globals";
 import ProfitCaculation from "./profitCalculation";
-import { getItemValuation, formatNumber, getSign } from "./utils";
+import { getItemValuation, formatNumber, getSign, t } from "./utils";
 
 const supportActionType = [
     "/action_types/milking",
@@ -65,7 +65,7 @@ export default function LostTrackerExpectEstimate() {
             // 生成显示元素
 
             const sign = getSign(excessProfit);
-            const content = `支出: ${formatNumber(outcome)} 收入: ${formatNumber(actualIncome)} 预期盈利：${formatNumber(expectedProfit)} 实现盈利: ${formatNumber(profit)} (${sign}${Math.abs(excessPercent)}%)`;
+            const content = `${t('支出', 'Expense')}: ${formatNumber(outcome)} ${t('收入', 'Revenue')}: ${formatNumber(actualIncome)} ${t('预期盈利', 'Expected Profit')}：${formatNumber(expectedProfit)} ${t('实现盈利', 'Actual Profit')}: ${formatNumber(profit)} (${sign}${Math.abs(excessPercent)}%)`;
 
             const colorIntensity = Math.min(Math.abs(excessPercent) / 20, 1) * 0.3 + 0.7;
             const color = excessProfit >= 0
@@ -85,7 +85,7 @@ export default function LostTrackerExpectEstimate() {
 
         totalDuration /= 24 * 60 * 60 * 1000;
         const excessPercent = (totalExcessProfit / totalExpectedProfit * 100).toFixed(2);
-        const content = `统计时长：${totalDuration.toFixed(2)}天 净利润: ${formatNumber(totalProfit)} (${formatNumber(totalProfit / totalDuration)}/天) 较预期: ${formatNumber(totalExcessProfit / totalDuration)}/天 (${excessPercent}%)`;
+        const content = `${t('统计时长', 'Duration')}：${totalDuration.toFixed(2)}${t('天', 'd')} ${t('净利润', 'Net Profit')}: ${formatNumber(totalProfit)} (${formatNumber(totalProfit / totalDuration)}/d) ${t('较预期', 'vs Expected')}: ${formatNumber(totalExcessProfit / totalDuration)}/d (${excessPercent}%)`;
         const colorIntensity = Math.min(Math.abs(excessPercent) / 20, 1) * 0.2 + 0.8;
         const color = excessPercent >= 0
             ? `rgb(${Math.floor(255 * colorIntensity)}, 0, 0)`  // 红色表示高于预期

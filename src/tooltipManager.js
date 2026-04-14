@@ -1,5 +1,5 @@
 import globals from './globals.js';
-import { formatNumber, timeReadable, getCurrentSkill } from './utils.js';
+import { formatNumber, timeReadable, getCurrentSkill, t } from './utils.js';
 
 export function createTooltip() {
     const tooltip = document.createElement('div');
@@ -195,16 +195,16 @@ function formatTooltipContent(data) {
                 <table style="width:100%; border-collapse: collapse;">
                     <tbody>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <th style="text-align: left;">原料</th>
-                            <th style="text-align: center;">数量</th>
-                            <th style="text-align: right;">出售价</th>
+                            <th style="text-align: left;">${t('原料', 'Material')}</th>
+                            <th style="text-align: center;">${t('数量', 'Qty')}</th>
+                            <th style="text-align: right;">${t('出售价', 'Ask')}</th>
                             <th style="text-align: left;"></th>
-                            <th style="text-align: right;">收购价</th>
+                            <th style="text-align: right;">${t('收购价', 'Bid')}</th>
                             <th style="text-align: left;"></th>
-                            <th style="text-align: right;">数量/小时</th>
+                            <th style="text-align: right;">${t('数量/小时', 'Qty/h')}</th>
                         </tr>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <td style="text-align: left;"><b>合计</b></td>
+                            <td style="text-align: left;"><b>${t('合计', 'Total')}</b></td>
                             <td style="text-align: right;"><b>/</b></td>
                             <td style="text-align: right;"><b>${formatNumber(totalInputAsk)}</b></td>
                             <th style="text-align: left;">${generateDiffInfo({ ask: totalInputAsk, medianAsk: totalInputMedianAsk }, "ask")}</th>
@@ -216,21 +216,21 @@ function formatTooltipContent(data) {
                     </tbody>
                 </table>
             </div>
-            <div><strong>每小时支出:</strong> ${formatNumber(data.expendPerHour)}</div>
+            <div><strong>${t('每小时支出', 'Hourly Expenditure')}:</strong> ${formatNumber(data.expendPerHour)}</div>
             <div style="color: #804600; font-size: 10px;">
                 <table style="width:100%; border-collapse: collapse;">
                     <tbody>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <th style="text-align: left;">产出</th>
-                            <th style="text-align: center;">数量</th>
-                            <th style="text-align: right;">出售价</th>
+                            <th style="text-align: left;">${t('产出', 'Output')}</th>
+                            <th style="text-align: center;">${t('数量', 'Qty')}</th>
+                            <th style="text-align: right;">${t('出售价', 'Ask')}</th>
                             <th style="text-align: left;"></th>
-                            <th style="text-align: right;">收购价</th>
+                            <th style="text-align: right;">${t('收购价', 'Bid')}</th>
                             <th style="text-align: left;"></th>
-                            <th style="text-align: right;">数量/小时</th>
+                            <th style="text-align: right;">${t('数量/小时', 'Qty/h')}</th>
                         </tr>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <td style="text-align: left;"><b>合计</b></td>
+                            <td style="text-align: left;"><b>${t('合计', 'Total')}</b></td>
                             <td style="text-align: right;"><b>/</b></td>
                             <td style="text-align: right;"><b>${formatNumber(totalOuputAsk)}</b></td>
                             <th style="text-align: left;">${generateDiffInfo({ ask: totalOuputAsk, medianAsk: totalOutputMedianAsk }, "ask")}</th>
@@ -242,7 +242,7 @@ function formatTooltipContent(data) {
                     </tbody>
                 </table>
             </div>
-            <div><strong>每小时收入(税后):</strong> ${formatNumber(data.outputPerHour.bid)}</div>
+            <div><strong>${t('每小时收入', 'Hourly Income')}(税后):</strong> ${formatNumber(data.outputPerHour.bid)}</div>
             <div style="color: #804600; font-size: 10px;">
                 <table style="width:100%; border-collapse: collapse;">
                     <tbody>
@@ -256,7 +256,7 @@ function formatTooltipContent(data) {
                             <th style="text-align: right;">经验</th>
                         </tr>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <td style="text-align: right;"><b>社区</b></td>
+                            <td style="text-align: right;"><b>${t('社区', 'Community')}</b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.communityBuff.action_speed)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.communityBuff.efficiency)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.communityBuff.gathering)} </b></td>
@@ -265,7 +265,7 @@ function formatTooltipContent(data) {
                             <td style="text-align: right;"><b> ${formatPercent(data.communityBuff.wisdom)} </b></td>
                         </tr>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <td style="text-align: right;"><b>茶</b></td>
+                            <td style="text-align: right;"><b>${t('茶', 'Tea')}</b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.teaBuffs.action_speed)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.teaBuffs.efficiency)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.teaBuffs.gathering)} </b></td>
@@ -274,7 +274,7 @@ function formatTooltipContent(data) {
                             <td style="text-align: right;"><b> ${formatPercent(data.teaBuffs.wisdom)} </b></td>
                         </tr>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <td style="text-align: right;"><b>装备</b></td>
+                            <td style="text-align: right;"><b>${t('装备', 'Equipment')}</b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.equipmentBuff.action_speed)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.equipmentBuff.efficiency)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.equipmentBuff.gathering)} </b></td>
@@ -283,14 +283,14 @@ function formatTooltipContent(data) {
                             <td style="text-align: right;"><b> ${formatPercent(data.equipmentBuff.wisdom)} </b></td>
                         </tr>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <td style="text-align: right;"><b>等级</b></td>
+                            <td style="text-align: right;"><b>${t('等级', 'Level')}</b></td>
                             <td style="text-align: right;"><b> - </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.levelEffBuff)} </b></td>
                             <td style="text-align: right;"><b> - </b></td>
                             <td style="text-align: right;"><b> - </b></td>
                         </tr>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <td style="text-align: right;"><b>房子</b></td>
+                            <td style="text-align: right;"><b>${t('房子', 'House')}</b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.houseBuff.action_speed)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.houseBuff.efficiency)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.houseBuff.gathering)} </b></td>
@@ -299,7 +299,7 @@ function formatTooltipContent(data) {
                             <td style="text-align: right;"><b> ${formatPercent(data.houseBuff.wisdom)} </b></td>
                         </tr>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <td style="text-align: right;"><b>成就</b></td>
+                            <td style="text-align: right;"><b>${t('成就', 'Achievement')}</b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.achievementBuff.action_speed)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.achievementBuff.efficiency)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.achievementBuff.gathering)} </b></td>
@@ -308,7 +308,7 @@ function formatTooltipContent(data) {
                             <td style="text-align: right;"><b> ${formatPercent(data.achievementBuff.wisdom)} </b></td>
                         </tr>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <td style="text-align: right;"><b>卷轴</b></td>
+                            <td style="text-align: right;"><b>${t('卷轴', 'Scroll')}</b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.personalBuff.action_speed)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.personalBuff.efficiency)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.personalBuff.gathering)} </b></td>
@@ -317,7 +317,7 @@ function formatTooltipContent(data) {
                             <td style="text-align: right;"><b> ${formatPercent(data.personalBuff.wisdom)} </b></td>
                         </tr>
                         <tr style="border-bottom: 1px solid #804600;">
-                            <td style="text-align: right;"><b>MooPass</b></td>
+                            <td style="text-align: right;"><b>${t('MooPass', 'MooPass')}</b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.mooPassBuff.action_speed)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.mooPassBuff.efficiency)} </b></td>
                             <td style="text-align: right;"><b> ${formatPercent(data.mooPassBuff.gathering)} </b></td>
@@ -328,11 +328,11 @@ function formatTooltipContent(data) {
                     </tbody>
                 </table>
             </div>
-            <div>每小时动作: ${data.actionPerHour.toFixed(2)}次</div>
-            <div>茶减少消耗: ${data.teaBuffs.artisan.toFixed(2)}%</div>
-            <div><strong>单次经验值:</strong> ${formatNumber(data.expPerAction)}</div>
-            <div><strong>每小时经验值:</strong> ${formatNumber(data.expPerHour)}</div>
-            <div><strong>每小时利润(税后):</strong> ${formatNumber(data.profitPerHour)}</div>
+            <div>${t('每小时动作', 'Actions/h')}: ${data.actionPerHour.toFixed(2)}${t('次', '')}</div>
+            <div>${t('茶减少消耗', 'Tea Reduction')}: ${data.teaBuffs.artisan.toFixed(2)}%</div>
+            <div><strong>${t('单次经验值', 'Exp/Action')}:</strong> ${formatNumber(data.expPerAction)}</div>
+            <div><strong>${t('每小时经验值', 'Exp/h')}:</strong> ${formatNumber(data.expPerHour)}</div>
+            <div><strong>${t('每小时利润', 'Hourly Profit')}(税后):</strong> ${formatNumber(data.profitPerHour)}</div>
             ${(() => {
                 const displayCount = globals.profitSettings?.levelUpDisplayCount || 3;
                 const currentSkill = getCurrentSkill(data.skillHrid);
@@ -343,16 +343,16 @@ function formatTooltipContent(data) {
                 }
 
                 let levelUpHtml = `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #804600;">
-                    <div style="font-weight: bold; margin-bottom: 4px;">升级预估 (${currentLevel}级 → ${currentLevel + displayCount}级):</div>
+                    <div style="font-weight: bold; margin-bottom: 4px;">${t('升级预估', 'Level Up Est.')} (${currentLevel}${t('级', 'lv')} → ${currentLevel + displayCount}${t('级', 'lv')}):</div>
                     <div style="font-size: 10px; color: #666;">`;
 
                 for (let i = 1; i <= displayCount; i++) {
                     const targetLevel = currentLevel + i;
                     const result = calculateNeedToLevel(data, targetLevel);
                     if (result) {
-                        levelUpHtml += `<div>到${targetLevel}级: ${timeReadable(result.timeSec)} (${formatNumber(result.numOfActions)}次)</div>`;
+                        levelUpHtml += `<div>${t('到', 'to')}${targetLevel}${t('级', 'lv')}: ${timeReadable(result.timeSec)} (${formatNumber(result.numOfActions)}${t('次', '次')})</div>`;
                     } else {
-                        levelUpHtml += `<div>到${targetLevel}级: -</div>`;
+                        levelUpHtml += `<div>${t('到', 'to')}${targetLevel}${t('级', 'lv')}: -</div>`;
                     }
                 }
 
