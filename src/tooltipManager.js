@@ -104,14 +104,13 @@ function getExpTable() {
 
 /**
  * 计算到目标等级需要的时间和动作数
- * @param {Object} data - 包含 expPerHour, expPerAction, skillHrid
+ * @param {Object} data - 包含 expPerHour, expPerAction
  * @param {number} targetLvl - 目标等级
+ * @param {Object} expTable - 经验表
+ * @param {Object} currentSkill - 当前技能数据
  * @returns {Object|null} - { numOfActions, timeSec } 或 null
  */
-function calculateNeedToLevel(data, targetLvl) {
-    const expTable = getExpTable();
-    const currentSkill = getCurrentSkill(data.skillHrid);
-
+function calculateNeedToLevel(data, targetLvl, expTable, currentSkill) {
     if (!expTable || !currentSkill || !data.expPerHour || data.expPerHour <= 0) {
         return null;
     }
@@ -337,6 +336,7 @@ function formatTooltipContent(data) {
                 const displayCount = globals.profitSettings?.levelUpDisplayCount || 3;
                 const currentSkill = getCurrentSkill(data.skillHrid);
                 const currentLevel = currentSkill?.level || 0;
+                const expTable = getExpTable();
 
                 if (currentLevel <= 0 || displayCount <= 0) {
                     return '';
@@ -348,7 +348,7 @@ function formatTooltipContent(data) {
 
                 for (let i = 1; i <= displayCount; i++) {
                     const targetLevel = currentLevel + i;
-                    const result = calculateNeedToLevel(data, targetLevel);
+                    const result = calculateNeedToLevel(data, targetLevel, expTable, currentSkill);
                     if (result) {
                         levelUpHtml += `<div>${t('到', 'to')}${targetLevel}${t('级', 'lv')}: ${timeReadable(result.timeSec)} (${formatNumber(result.numOfActions)}${t('次', '次')})</div>`;
                     } else {
