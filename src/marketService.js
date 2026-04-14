@@ -412,8 +412,8 @@ class UnifyMarketData {
                 dataSrcArr.push(`${val} (${formatNumber(this.statMap.src[val] * 100 / this.statMap.src.total)}%)`);
             }
         }
-        const oldestItemName = getItemName(this.statMap.oldestItem.name.replace(/\//g, '_').replace(/^_/, '/'));
-        const newestItemName = getItemName(this.statMap.newestItem.name.replace(/\//g, '_').replace(/^_/, '/'));
+        const oldestItemName = globals.isZHInGameSetting ? globals.en2ZhMap[this.statMap.oldestItem.name] : this.statMap.oldestItem.name;
+        const newestItemName = globals.isZHInGameSetting ? globals.en2ZhMap[this.statMap.newestItem.name] : this.statMap.newestItem.name;
         const oldestStr = `${oldestItemName}(${getDuration(new Date(this.statMap.oldestItem.time * 1000))})`;
         const newestStr = `${newestItemName}(${getDuration(new Date(this.statMap.newestItem.time * 1000))})`;
 

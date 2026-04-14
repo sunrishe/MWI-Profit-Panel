@@ -30,7 +30,7 @@ export function GenerateDom(marketJson) {
                 `
                 <div class="Item_itemContainer__x7kH1" style="position: relative;">
                     <div>
-                        <div class="Item_item__2De2O Item_clickable__3viV6 Profit-pannel" style="${levelEngouth ? "" : "background-color: var(--color-midnight-800);"}" data-tooltip='${JSON.stringify(result)}'>
+                        <div class="Item_item__2De2O Item_clickable__3viV6 Profit-pannel" style="${levelEngouth ? "" : "background-color: var(--color-midnight-800);"}" data-tooltip="${JSON.stringify(result).replace(/"/g, '&quot;')}">
                             <div class="Item_iconContainer__5z7j4"><svg role="img" aria-label="${action.name}"
                                     class="Icon_icon__2LtL_" width="100%" height="100%">
                                     <use href="/static/media/${getSvg(iconId)}"></use>
