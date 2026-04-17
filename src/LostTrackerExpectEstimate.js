@@ -48,6 +48,7 @@ export default function LostTrackerExpectEstimate() {
             const startTime = new Date(logData.startTime);
             const endTime = new Date(logData.endTime);
             const durationHours = (endTime - startTime) / (1000 * 60 * 60);
+            const durationDays = durationHours / 24;
 
             // 计算预期收益
             const expectedIncome = expected.outputPerHour.bid * durationHours;
@@ -65,13 +66,13 @@ export default function LostTrackerExpectEstimate() {
             // 生成显示元素
 
             const sign = getSign(excessProfit);
-            const content = `${t('支出', 'Expense')}: ${formatNumber(outcome)} ${t('收入', 'Revenue')}: ${formatNumber(actualIncome)} ${t('预期盈利', 'Expected Profit')}：${formatNumber(expectedProfit)} ${t('实现盈利', 'Actual Profit')}: ${formatNumber(profit)} (${sign}${Math.abs(excessPercent)}%)`;
+            const content = `${t('支出', 'Expense')}: ${formatNumber(outcome)} ${t('收入', 'Revenue')}: ${formatNumber(actualIncome)} ${t('预期盈利', 'Expected Profit')}: ${formatNumber(expectedProfit)} (${formatNumber(expectedProfit / durationDays)}/${t('天', 'd')}) ${t('实现盈利', 'Actual Profit')}: ${formatNumber(profit)} (${formatNumber(profit / durationDays)}/${t('天', 'd')}, ${sign}${Math.abs(excessPercent)}%)`;
 
             const colorIntensity = Math.min(Math.abs(excessPercent) / 20, 1) * 0.3 + 0.7;
-            const color = excessProfit >= 0
-                ? `rgb(${Math.floor(255 * colorIntensity)}, 0, 0)`  // 红色表示高于预期
+            const color = excessProfit >= 0 ? `rgb(${Math.floor(255 * colorIntensity)}, 0, 0)`  // 红色表示高于预期
                 : `rgb(0, ${Math.floor(255 * colorIntensity)}, 0)`; // 绿色表示低于预期
             const span = document.createElement('span');
+            span.className = 'mwi-profit-statis';
             span.style.marginLeft = '8px';
             span.style.color = color;
             span.textContent = content;
@@ -79,18 +80,23 @@ export default function LostTrackerExpectEstimate() {
             // 添加到动作名称后面
             const actionNameSpan = lootElem.querySelector('span:not(.loot-log-index)');
             if (actionNameSpan) {
+                const targetSpans = lootElem.querySelectorAll('span.mwi-profit-statis');
+                Array.from(targetSpans).forEach(span => {
+                    span.parentNode.removeChild(span);
+                });
                 actionNameSpan.appendChild(span);
             }
         });
 
         totalDuration /= 24 * 60 * 60 * 1000;
         const excessPercent = (totalExcessProfit / totalExpectedProfit * 100).toFixed(2);
-        const content = `${t('统计时长', 'Duration')}：${totalDuration.toFixed(2)}${t('天', 'd')} ${t('净利润', 'Net Profit')}: ${formatNumber(totalProfit)} (${formatNumber(totalProfit / totalDuration)}/d) ${t('较预期', 'vs Expected')}: ${formatNumber(totalExcessProfit / totalDuration)}/d (${excessPercent}%)`;
+        const content = `${t('统计时长', 'Duration')}: ${totalDuration.toFixed(2)}${t('天', 'd')} ${t('净利润', 'Net Profit')}: ${formatNumber(totalProfit)} (${formatNumber(totalProfit / totalDuration)}/${t('天', 'd')}) ${t('较预期', 'vs Expected')}: ${formatNumber(totalExcessProfit / totalDuration)}/${t('天', 'd')} (${excessPercent}%)`;
         const colorIntensity = Math.min(Math.abs(excessPercent) / 20, 1) * 0.2 + 0.8;
         const color = excessPercent >= 0
             ? `rgb(${Math.floor(255 * colorIntensity)}, 0, 0)`  // 红色表示高于预期
             : `rgb(0, ${Math.floor(255 * colorIntensity)}, 0)`; // 绿色表示低于预期
         const summarySpan = document.createElement('span');
+        summarySpan.className = 'mwi-profit-statis';
         summarySpan.style.marginLeft = '8px';
         summarySpan.style.color = color;
         summarySpan.textContent = content;
@@ -98,6 +104,10 @@ export default function LostTrackerExpectEstimate() {
         // 添加到顶部按钮行
         const buttonContainer = document.querySelector('.LootLogPanel_lootLogPanel__2013X div');
         if (buttonContainer) {
+            const targetSpans = buttonContainer.querySelectorAll('span.mwi-profit-statis');
+            Array.from(targetSpans).forEach(span => {
+                span.parentNode.removeChild(span);
+            });
             buttonContainer.appendChild(summarySpan);
         }
     }, 200);

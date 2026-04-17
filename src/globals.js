@@ -1,6 +1,7 @@
 // 全局状态管理器
 class GlobalState {
     constructor() {
+        const hostname = window.location.hostname;
         this._state = {
             initClientData_itemDetailMap: {},
             initClientData_actionDetailMap: {},
@@ -23,7 +24,8 @@ class GlobalState {
             processingMap: {},
             en2ZhMap: {},
             lootLog: [],
-            profitSettings: {}
+            profitSettings: {},
+            domainname: hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1)
         };
 
         this._listeners = new Set();
