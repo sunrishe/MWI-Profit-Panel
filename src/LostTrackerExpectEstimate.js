@@ -1,5 +1,5 @@
 import globals from "./globals";
-import ProfitCaculation from "./profitCalculation";
+import ProfitCalculation from "./profitCalculation";
 import { getItemValuation, formatNumber, getSign, t } from "./utils";
 
 const supportActionType = [
@@ -33,7 +33,7 @@ export default function LostTrackerExpectEstimate() {
             if (supportActionType.indexOf(action.type) === -1) return;
 
             // 计算预期收益
-            const expected = ProfitCaculation(action, globals.medianMarketJson);
+            const expected = ProfitCalculation(action, globals.medianMarketJson);
 
             // 计算实际收益
             let actualIncome = 0;
@@ -72,7 +72,7 @@ export default function LostTrackerExpectEstimate() {
             const color = excessProfit >= 0 ? `rgb(${Math.floor(255 * colorIntensity)}, 0, 0)`  // 红色表示高于预期
                 : `rgb(0, ${Math.floor(255 * colorIntensity)}, 0)`; // 绿色表示低于预期
             const span = document.createElement('span');
-            span.className = 'mwi-profit-statis';
+            span.className = 'mwi-profit-stats';
             span.style.marginLeft = '8px';
             span.style.color = color;
             span.textContent = content;
@@ -80,7 +80,7 @@ export default function LostTrackerExpectEstimate() {
             // 添加到动作名称后面
             const actionNameSpan = lootElem.querySelector('span:not(.loot-log-index)');
             if (actionNameSpan) {
-                const targetSpans = lootElem.querySelectorAll('span.mwi-profit-statis');
+                const targetSpans = lootElem.querySelectorAll('span.mwi-profit-stats');
                 Array.from(targetSpans).forEach(span => {
                     span.parentNode.removeChild(span);
                 });
@@ -96,7 +96,7 @@ export default function LostTrackerExpectEstimate() {
             ? `rgb(${Math.floor(255 * colorIntensity)}, 0, 0)`  // 红色表示高于预期
             : `rgb(0, ${Math.floor(255 * colorIntensity)}, 0)`; // 绿色表示低于预期
         const summarySpan = document.createElement('span');
-        summarySpan.className = 'mwi-profit-statis';
+        summarySpan.className = 'mwi-profit-stats';
         summarySpan.style.marginLeft = '8px';
         summarySpan.style.color = color;
         summarySpan.textContent = content;
@@ -104,7 +104,7 @@ export default function LostTrackerExpectEstimate() {
         // 添加到顶部按钮行
         const buttonContainer = document.querySelector('.LootLogPanel_lootLogPanel__2013X div');
         if (buttonContainer) {
-            const targetSpans = buttonContainer.querySelectorAll('span.mwi-profit-statis');
+            const targetSpans = buttonContainer.querySelectorAll('span.mwi-profit-stats');
             Array.from(targetSpans).forEach(span => {
                 span.parentNode.removeChild(span);
             });
