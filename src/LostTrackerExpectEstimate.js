@@ -48,6 +48,7 @@ export default function LostTrackerExpectEstimate() {
             const startTime = new Date(logData.startTime);
             const endTime = new Date(logData.endTime);
             const durationHours = (endTime - startTime) / (1000 * 60 * 60);
+            const durationDays = durationHours / 24;
 
             // 计算预期收益
             const expectedIncome = expected.outputPerHour.bid * durationHours;
@@ -65,11 +66,10 @@ export default function LostTrackerExpectEstimate() {
             // 生成显示元素
 
             const sign = getSign(excessProfit);
-            const content = `${t('支出', 'Expense')}: ${formatNumber(outcome)} ${t('收入', 'Revenue')}: ${formatNumber(actualIncome)} ${t('预期盈利', 'Expected Profit')}：${formatNumber(expectedProfit)} ${t('实现盈利', 'Actual Profit')}: ${formatNumber(profit)} (${sign}${Math.abs(excessPercent)}%)`;
+            const content = `${t('支出', 'Expense')}: ${formatNumber(outcome)} ${t('收入', 'Revenue')}: ${formatNumber(actualIncome)} ${t('预期盈利', 'Expected Profit')}: ${formatNumber(expectedProfit)} (${formatNumber(expectedProfit / durationDays)}/${t('天', 'd')}) ${t('实现盈利', 'Actual Profit')}: ${formatNumber(profit)} (${formatNumber(profit / durationDays)}/${t('天', 'd')}, ${sign}${Math.abs(excessPercent)}%)`;
 
             const colorIntensity = Math.min(Math.abs(excessPercent) / 20, 1) * 0.3 + 0.7;
-            const color = excessProfit >= 0
-                ? `rgb(${Math.floor(255 * colorIntensity)}, 0, 0)`  // 红色表示高于预期
+            const color = excessProfit >= 0 ? `rgb(${Math.floor(255 * colorIntensity)}, 0, 0)`  // 红色表示高于预期
                 : `rgb(0, ${Math.floor(255 * colorIntensity)}, 0)`; // 绿色表示低于预期
             const span = document.createElement('span');
             span.style.marginLeft = '8px';
@@ -85,7 +85,7 @@ export default function LostTrackerExpectEstimate() {
 
         totalDuration /= 24 * 60 * 60 * 1000;
         const excessPercent = (totalExcessProfit / totalExpectedProfit * 100).toFixed(2);
-        const content = `${t('统计时长', 'Duration')}：${totalDuration.toFixed(2)}${t('天', 'd')} ${t('净利润', 'Net Profit')}: ${formatNumber(totalProfit)} (${formatNumber(totalProfit / totalDuration)}/d) ${t('较预期', 'vs Expected')}: ${formatNumber(totalExcessProfit / totalDuration)}/d (${excessPercent}%)`;
+        const content = `${t('统计时长', 'Duration')}: ${totalDuration.toFixed(2)}${t('天', 'd')} ${t('净利润', 'Net Profit')}: ${formatNumber(totalProfit)} (${formatNumber(totalProfit / totalDuration)}/d) ${t('较预期', 'vs Expected')}: ${formatNumber(totalExcessProfit / totalDuration)}/d (${excessPercent}%)`;
         const colorIntensity = Math.min(Math.abs(excessPercent) / 20, 1) * 0.2 + 0.8;
         const color = excessPercent >= 0
             ? `rgb(${Math.floor(255 * colorIntensity)}, 0, 0)`  // 红色表示高于预期
