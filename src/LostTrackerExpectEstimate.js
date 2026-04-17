@@ -90,7 +90,7 @@ export default function LostTrackerExpectEstimate() {
 
         totalDuration /= 24 * 60 * 60 * 1000;
         const excessPercent = (totalExcessProfit / totalExpectedProfit * 100).toFixed(2);
-        const content = `${t('统计时长', 'Duration')}: ${totalDuration.toFixed(2)}${t('天', 'd')} ${t('净利润', 'Net Profit')}: ${formatNumber(totalProfit)} (${formatNumber(totalProfit / totalDuration)}/d) ${t('较预期', 'vs Expected')}: ${formatNumber(totalExcessProfit / totalDuration)}/d (${excessPercent}%)`;
+        const content = `${t('统计时长', 'Duration')}: ${totalDuration.toFixed(2)}${t('天', 'd')} ${t('净利润', 'Net Profit')}: ${formatNumber(totalProfit)} (${formatNumber(totalProfit / totalDuration)}/${t('天', 'd')}) ${t('较预期', 'vs Expected')}: ${formatNumber(totalExcessProfit / totalDuration)}/${t('天', 'd')} (${excessPercent}%)`;
         const colorIntensity = Math.min(Math.abs(excessPercent) / 20, 1) * 0.2 + 0.8;
         const color = excessPercent >= 0
             ? `rgb(${Math.floor(255 * colorIntensity)}, 0, 0)`  // 红色表示高于预期
